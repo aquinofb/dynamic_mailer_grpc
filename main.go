@@ -28,9 +28,9 @@ func dynamicMailerHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		status := services.SendEmail(
 			pb.Payload{
-				Event:               r.FormValue("message[event]"),
-				ReferenceUuid: r.FormValue("message[reference_uuid]"),
-				Email:               r.FormValue("message[email]")},
+				Event:          r.FormValue("message[event]"),
+				ReferenceUuid: 	r.FormValue("message[reference_uuid]"),
+				Email:          r.FormValue("message[email]")},
 		)
 
 		if status == 200 {
@@ -42,9 +42,9 @@ func dynamicMailerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/",							 	indexHandler)
-	http.HandleFunc("/dynamic-mailer", 	dynamicMailerHandler)
-	http.HandleFunc("/not-found", 			notFoundHandler)
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/dynamic-mailer", dynamicMailerHandler)
+	http.HandleFunc("/not-found", notFoundHandler)
 	fmt.Println(".")
 	fmt.Println("Server running smoothly on 9090... ( ಠ_ರೃ) ٩(⁎❛ᴗ❛⁎)۶")
 	err := http.ListenAndServe(":9090", nil)
